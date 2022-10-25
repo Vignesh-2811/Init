@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,10 +7,10 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    INIT
-  </title>
+    INIT </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- Material Icons -->
@@ -16,15 +18,27 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="assets/css/material-dashboard.min.css" rel="stylesheet" />
 
+  <!-- Alertify JS -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
+
   <style>
-    .form-control{
-      border: 1px solid #b3a1a1 !important;
+    .form-control {
+      border: 1px solid #B3A1A1 !important;
       padding: 8px 10px;
+    }
+
+    .form-select {
+      border: 1px solid #B3A1A1 !important;
+      padding: 8px 10px;
+
     }
   </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
   <?php include('aside.php'); ?>
-<main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-  <?php include('navbar.php'); ?>
+
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <?php include('navbar.php'); ?>
