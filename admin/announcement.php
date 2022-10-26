@@ -40,7 +40,7 @@ include('../functions/myfunctions.php');
                                         </td>
 
                                         <td>
-                                            <a href="#" class="btn btn-primary">Edit</a>
+                                            <a href="edit-announcement.php?id=<?= $item['id']; ?>" class="btn btn-primary">Edit</a>
                                         </td>
                                     </tr>
                                     <?php

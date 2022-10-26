@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 include('../config/connection.php');
 
 function getAll($table)
@@ -7,6 +7,15 @@ function getAll($table)
     global $conn;
     $query = "SELECT * FROM $table";
     return $query_run = mysqli_query($conn, $query);
+}
+
+function getByID($table, $id)
+{
+    global $conn;
+    $query = "SELECT * FROM $table WHERE id = '$id' ";
+    // return $query;
+    return $query_run = mysqli_query($conn, $query);
+
 }
 
 
