@@ -91,4 +91,32 @@ else if(isset($_POST['update_announcement_btn']))
 
 
 }
+else if(isset($_POST['delete_announcement_btn']))
+{
+    $announcement_id = mysqli_real_escape_string($conn, $_POST['announcement_id']);
+
+    $announcement_query = "SELECT * FROM announcement WHERE id='$announcement_id' ";
+    $announcement_query_run = mysqli_query($conn, $announcement_query);
+    $announcement_data = mysqli_fetch_array($announcement_query_run);
+    $poster = $announcement_data['poster'];
+
+    $delete_query = "DELETE FROM announcement WHERE id='$announcement_id' ";
+    $delete_query_run = mysqli_query($conn, $delete_query);
+
+    if($delete_query_run)
+    {
+        if(file_exists("../uploads/".$poster))
+        {
+            unlink("../uploads/".$poster);
+        }
+        redirect("announcement.php", "Announcement Deleted Successfully");
+    }
+    else
+    {
+        redirect("announcement.php", "Something Went Wrong");
+
+
+
+    }
+}
 ?>

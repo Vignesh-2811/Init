@@ -43,7 +43,7 @@
           <li><a class="nav-link scrollto " href="#">Forum</a></li>
           <li><a class="nav-link scrollto" href="startup.php">Startups</a></li>
           <li><a class="nav-link scrollto" href="#">Contact</a></li>
-          <li><a class="nav-link scrollto" href="#">Sign In</a></li>
+          <li><a class="nav-link scrollto" href="login.php">Sign In</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
