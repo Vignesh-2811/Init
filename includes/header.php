@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,6 +28,10 @@
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
+  <!-- Alertify JS -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css" />
+
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
   
@@ -37,13 +45,32 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto" href="index.php">Home</a></li>
-          <li><a class="nav-link scrollto" href="about.php">About</a></li>
-          <li><a class="nav-link scrollto" href="#">Blog</a></li>
-          <li><a class="nav-link scrollto " href="#">Forum</a></li>
-          <li><a class="nav-link scrollto" href="startup.php">Startups</a></li>
-          <li><a class="nav-link scrollto" href="#">Contact</a></li>
-          <li><a class="nav-link scrollto" href="login.php">Sign In</a></li>
+          <li><a class="nav-link" href="index.php">Home</a></li>
+          <li><a class="nav-link" href="about.php">About</a></li>
+          <li><a class="nav-link" href="#">Blog</a></li>
+          <li><a class="nav-link" href="startup.php">Startups</a></li>
+          <li><a class="nav-link" href="#">Contact</a></li>
+
+          <?php
+          if(isset($_SESSION['auth']))
+          {
+          ?><li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"><?= $_SESSION['auth_user']['name']; ?></a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="profile.php">My Profile</a></li>
+              <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+            </ul>  
+        
+        </li>
+
+
+            <?php
+          }
+          else
+          {
+          ?>
+          <li><a class="nav-link" href="login.php">Sign In</a></li>
+          <li><a class="nav-link" href="register.php">Register</a></li>
+          <?php } ?>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
