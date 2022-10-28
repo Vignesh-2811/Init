@@ -1,6 +1,7 @@
 <?php
+include('../middleware/adminMiddleware.php');
 include('includes/header.php');
-include('../functions/myfunctions.php');
+// include('../functions/myfunctions.php');
 ?>
 
 <div class="container">
@@ -18,7 +19,8 @@ include('../functions/myfunctions.php');
                                 <th>Title</th>
                                 <th>Poster</th>
                                 <th>publish</th>
-                                <th>Action</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -41,6 +43,8 @@ include('../functions/myfunctions.php');
 
                                         <td>
                                             <a href="edit-announcement.php?id=<?= $item['id']; ?>" class="btn btn-primary">Edit</a>
+                                        </td>
+                                        <td>
                                             <form action="code.php" method="POST">
                                                 <input type="hidden" name="announcement_id" value=" <?= $item['id']; ?>">
                                                 <button type="Submit" class="btn btn-danger" name="delete_announcement_btn">Delete</button>

@@ -84,15 +84,21 @@ else if(isset($_POST['login_btn']))
 
         if($role_as == 1)
         {
+            // $_SESSION['message'] = "Welcome to dashboard";
+            // header('Location: ../admin/index.php');
             redirect("../admin/index.php","Welcome to dashboard");
         }
         else
         {
+            // $_SESSION['message'] = "Logged in Successfully";
+            // header('Location: ../index.php');
             redirect("../index.php","Logged in Successfully");
         }
     }
     else
     {
+        // $_SESSION['message'] = "Invalid Credentials";
+        //     header('Location: ../login.php');
         redirect("../login.php","Invalid Credentials");
     }
 }
