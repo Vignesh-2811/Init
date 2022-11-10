@@ -1,4 +1,3 @@
-//hiii
 <?php 
 session_start();
 ?>
