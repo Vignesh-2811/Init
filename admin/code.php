@@ -4,22 +4,21 @@ session_start();
 include('../config/connection.php');
 include('../functions/myfunctions.php');
 
-if(isset($_POST['add_announcement_btn']))
-{
+if (isset($_POST['add_announcement_btn'])) {
     $name = $_POST['name'];
     $slug = $_POST['slug'];
     $shortdescription = $_POST['shortdescription'];
     $description = $_POST['description'];
     $registrationlink = $_POST['registrationlink'];
-    $publish = isset($_POST['publish']) ? '1':'0';
-    $registrationsopen = isset($_POST['registrationsopen']) ? '1':'0';
+    $publish = isset($_POST['publish']) ? '1' : '0';
+    $registrationsopen = isset($_POST['registrationsopen']) ? '1' : '0';
 
     $image = $_FILES['poster']['name'];
 
-    $path ="../uploads";
+    $path = "../uploads";
 
     $image_ext = pathinfo($image, PATHINFO_EXTENSION);
-    $filename = time().'.'.$image_ext;
+    $filename = time() . '.' . $image_ext;
 
     $announcement_query = "INSERT INTO announcement 
     (title,slug,shortdescription,description,registrationlink,publish,registrationsopen,poster)
@@ -29,38 +28,29 @@ if(isset($_POST['add_announcement_btn']))
 
     $announcement_query_run = mysqli_query($conn, $announcement_query);
 
-    if($announcement_query_run)
-    {
-        move_uploaded_file($_FILES['poster']['tmp_name'], $path.'/'.$filename);
+    if ($announcement_query_run) {
+        move_uploaded_file($_FILES['poster']['tmp_name'], $path . '/' . $filename);
         redirect("add-announcement.php", "Announcement added successfully");
-    }
-    else
-    {
+    } else {
         redirect("add-announcement.php", "Something went wrong");
     }
-
-}
-else if(isset($_POST['update_announcement_btn']))
-{
+} else if (isset($_POST['update_announcement_btn'])) {
     $announcement_id = $_POST['announcement_id'];
     $name = $_POST['name'];
     $slug = $_POST['slug'];
     $shortdescription = $_POST['shortdescription'];
     $description = $_POST['description'];
     $registrationlink = $_POST['registrationlink'];
-    $publish = isset($_POST['publish']) ? '1':'0';
-    $registrationsopen = isset($_POST['registrationsopen']) ? '1':'0';
+    $publish = isset($_POST['publish']) ? '1' : '0';
+    $registrationsopen = isset($_POST['registrationsopen']) ? '1' : '0';
 
     $new_poster = $_FILES['poster']['name'];
     $old_poster = $_POST['old_poster'];
 
-    if($new_poster != "")
-    {
+    if ($new_poster != "") {
         $image_ext = pathinfo($new_poster, PATHINFO_EXTENSION);
-        $update_filename = time().'.'.$image_ext;
-    }
-    else
-    {
+        $update_filename = time() . '.' . $image_ext;
+    } else {
         $update_filename = $old_poster;
     }
     $path = "../uploads";
@@ -72,27 +62,18 @@ else if(isset($_POST['update_announcement_btn']))
 
     $update_query_run = mysqli_query($conn, $update_query);
 
-    if($update_query_run)
-    {
-        if($_FILES['poster']['name'] != "")
-        {
-            move_uploaded_file($_FILES['poster']['tmp_name'], $path.'/'.$update_filename);
-            if(file_exists("../uploads/".$old_poster))
-            {
-                unlink("../uploads/".$old_poster);
+    if ($update_query_run) {
+        if ($_FILES['poster']['name'] != "") {
+            move_uploaded_file($_FILES['poster']['tmp_name'], $path . '/' . $update_filename);
+            if (file_exists("../uploads/" . $old_poster)) {
+                unlink("../uploads/" . $old_poster);
             }
         }
-        redirect("edit-announcement.php?id=$announcement_id","Announcement Updated Successfully");
-    }
-    else
-    {
+        redirect("edit-announcement.php?id=$announcement_id", "Announcement Updated Successfully");
+    } else {
         redirect("edit-announcement.php?id=$announcement_id", "Something Went Wrong");
     }
-
-
-}
-else if(isset($_POST['delete_announcement_btn']))
-{
+} else if (isset($_POST['delete_announcement_btn'])) {
     $announcement_id = mysqli_real_escape_string($conn, $_POST['announcement_id']);
 
     $announcement_query = "SELECT * FROM announcement WHERE id='$announcement_id' ";
@@ -103,24 +84,16 @@ else if(isset($_POST['delete_announcement_btn']))
     $delete_query = "DELETE FROM announcement WHERE id='$announcement_id' ";
     $delete_query_run = mysqli_query($conn, $delete_query);
 
-    if($delete_query_run)
-    {
-        if(file_exists("../uploads/".$poster))
-        {
-            unlink("../uploads/".$poster);
+    if ($delete_query_run) {
+        if (file_exists("../uploads/" . $poster)) {
+            unlink("../uploads/" . $poster);
         }
         redirect("announcement.php", "Announcement Deleted Successfully");
-    }
-    else
-    {
+    } else {
         redirect("announcement.php", "Something Went Wrong");
-
-
-
     }
 }
-if(isset($_POST['add_details_btn']))
-{
+if (isset($_POST['add_details_btn'])) {
     $announcementid = $_POST['announcementid'];
     $organiser = $_POST['organiser'];
     $eventtype = $_POST['eventtype'];
@@ -142,22 +115,27 @@ if(isset($_POST['add_details_btn']))
     $contactperson2number = $_POST['contactperson2number'];
 
 
-    $add_details_query = "INSERT INTO announcementdetails 
-    (announcementid, organiser, eventtype, payment, category, venue, description, startdate, enddate, timingsfrom, timingsto, prerequisites, youtubelink, paymentdetails, registrationlink, contactperson1name, contactperson1number, contactperson2name, contactperson2number)
-    VALUES ('$announcementid', '$organiser', '$eventtype', '$payment', '$category', '$venue', '$description', '$startdate', '$enddate', '$timingsfrom', '$timingsto', '$prerequisites', '$youtubelink', '$paymentdetails', '$registrationlink', '$contactperson1name', '$contactperson1number', '$contactperson2name', '$contactperson2number')";
+
 
     // print_r($add_details_query);die;
+    $check_detailS_query = "SELECT announcementid FROM announcementdetails WHERE announcementid = '$announcementid' ";
+    $check_detailS_query = mysqli_query($conn, $check_detailS_query);
 
-    $add_details_query = mysqli_query($conn, $add_details_query);
+    if (mysqli_num_rows($check_detailS_query) > 0) {
+        redirect("details.php", "Details already added! Try updating details!");
+        // $_SESSION['message'] = "Email already registered";
+        // header("Location: ../register.php");
+    } else {
+        $add_details_query = "INSERT INTO announcementdetails 
+        (announcementid, organiser, eventtype, payment, category, venue, description, startdate, enddate, timingsfrom, timingsto, prerequisites, youtubelink, paymentdetails, registrationlink, contactperson1name, contactperson1number, contactperson2name, contactperson2number)
+        VALUES ('$announcementid', '$organiser', '$eventtype', '$payment', '$category', '$venue', '$description', '$startdate', '$enddate', '$timingsfrom', '$timingsto', '$prerequisites', '$youtubelink', '$paymentdetails', '$registrationlink', '$contactperson1name', '$contactperson1number', '$contactperson2name', '$contactperson2number')";
 
-    if($add_details_query)
-    {
-        redirect("details.php", "details added successfully");
+        $add_details_query_run = mysqli_query($conn, $add_details_query);
+
+        if ($add_details_query) {
+            redirect("details.php", "details added successfully");
+        } else {
+            redirect("details.php", "Something went wrong");
+        }
     }
-    else
-    {
-        redirect("details.php", "Something went wrong");
-    }
-
 }
-?>
