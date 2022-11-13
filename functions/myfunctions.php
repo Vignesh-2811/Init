@@ -9,6 +9,14 @@ function getAll($table)
     return $query_run = mysqli_query($conn, $query);
 }
 
+function getAnn($table, $name)
+{
+    global $conn;
+    $query = "SELECT * FROM $table WHERE club = '$name'";
+    return $query_run = mysqli_query($conn, $query);
+    
+}
+
 function getByID($table, $id)
 {
     global $conn;

@@ -49,7 +49,7 @@ session_start();
           <li><a class="nav-link" href="about.php">About</a></li>
           <li><a class="nav-link" href="#">Blog</a></li>
           <li><a class="nav-link" href="startup.php">Startups</a></li>
-          <li><a class="nav-link" href="#">Contact</a></li>
+          <li><a class="nav-link" href="contact.php">Contact</a></li>
 
           <?php
           if(isset($_SESSION['auth']))

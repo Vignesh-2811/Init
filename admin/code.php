@@ -119,4 +119,45 @@ else if(isset($_POST['delete_announcement_btn']))
 
     }
 }
+if(isset($_POST['add_details_btn']))
+{
+    $announcementid = $_POST['announcementid'];
+    $organiser = $_POST['organiser'];
+    $eventtype = $_POST['eventtype'];
+    $payment = $_POST['payment'];
+    $category = $_POST['category'];
+    $venue = $_POST['venue'];
+    $description = $_POST['description'];
+    $startdate = $_POST['startdate'];
+    $enddate = $_POST['enddate'];
+    $timingsfrom = $_POST['timingsfrom'];
+    $timingsto = $_POST['timingsto'];
+    $prerequisites = $_POST['prerequisites'];
+    $youtubelink = $_POST['youtubelink'];
+    $paymentdetails = $_POST['paymentdetails'];
+    $registrationlink = $_POST['registrationlink'];
+    $contactperson1name = $_POST['contactperson1name'];
+    $contactperson1number = $_POST['contactperson1number'];
+    $contactperson2name = $_POST['contactperson2name'];
+    $contactperson2number = $_POST['contactperson2number'];
+
+
+    $add_details_query = "INSERT INTO announcementdetails 
+    (announcementid, organiser, eventtype, payment, category, venue, description, startdate, enddate, timingsfrom, timingsto, prerequisites, youtubelink, paymentdetails, registrationlink, contactperson1name, contactperson1number, contactperson2name, contactperson2number)
+    VALUES ('$announcementid', '$organiser', '$eventtype', '$payment', '$category', '$venue', '$description', '$startdate', '$enddate', '$timingsfrom', '$timingsto', '$prerequisites', '$youtubelink', '$paymentdetails', '$registrationlink', '$contactperson1name', '$contactperson1number', '$contactperson2name', '$contactperson2number')";
+
+    // print_r($add_details_query);die;
+
+    $add_details_query = mysqli_query($conn, $add_details_query);
+
+    if($add_details_query)
+    {
+        redirect("details.php", "details added successfully");
+    }
+    else
+    {
+        redirect("details.php", "Something went wrong");
+    }
+
+}
 ?>

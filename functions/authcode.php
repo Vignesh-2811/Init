@@ -86,7 +86,7 @@ else if(isset($_POST['login_btn']))
         {
             // $_SESSION['message'] = "Welcome to dashboard";
             // header('Location: ../admin/index.php');
-            redirect("../admin/index.php","Welcome to dashboard");
+            redirect("../admin/announcement.php","Welcome to dashboard");
         }
         else
         {
@@ -99,6 +99,45 @@ else if(isset($_POST['login_btn']))
     {
         // $_SESSION['message'] = "Invalid Credentials";
         //     header('Location: ../login.php');
+        
         redirect("../login.php","Invalid Credentials");
+    }
+}
+else if(isset($_POST['adminlogin_btn']))
+{
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']);
+
+    $login_query = "SELECT * FROM admins WHERE email='$email' AND password='$password'";
+    $login_query_run = mysqli_query($conn, $login_query);
+    
+    if(mysqli_num_rows($login_query_run) > 0)
+    {
+        $_SESSION['auth'] = true;
+
+        $userdata = mysqli_fetch_array($login_query_run);
+        $userid = $userdata['id'];
+        $username = $userdata['name'];
+        $useremail = $userdata['email'];
+        $role_as = $userdata['role_as'];
+
+        $_SESSION['auth_user'] = [
+            'user_id' => $userid,
+            'name' => $username,
+            'email' => $useremail,
+            'role_as' => $role_as,
+        ];
+        if($role_as == '1')
+        {
+            redirect("../admin/announcement.php","Welcome to dashboard");
+        }
+        else
+        {
+            redirect("../index.php","Logged in Successfully");
+        }
+    }
+    else
+    {
+        redirect("../adminlogin.php","Invalid Credentials");
     }
 }

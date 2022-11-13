@@ -25,7 +25,8 @@ include('includes/header.php');
                         </thead>
                         <tbody>
                             <?php
-                            $announcement = getAll("announcement");
+                            $name = $_SESSION['auth_user']['name'];
+                            $announcement = getAnn("announcement", "$name");
                             
                             if(mysqli_num_rows($announcement) > 0)
                             {

@@ -7,7 +7,7 @@ session_start();
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Signin Page</title>
+    <title>admin</title>
 
     <!-- Font Icon -->
     <link rel="stylesheet" href="assets/fonts/material-icon/css/material-design-iconic-font.min.css">
@@ -26,12 +26,11 @@ session_start();
                 <div class="signin-content">
                     <div class="signin-image">
                         <figure><img src="assets/img/signin-image.jpg" alt="sign up image"></figure>
-                        <a href="register.php" class="signup-image-link">Create an account</a>
-                        <a href="adminlogin.php" class="signup-image-link">Admin?</a>
+                        <!-- <a href="register.php" class="signup-image-link">Create an account</a> -->
                     </div>
 
                     <div class="signin-form">
-                        <h2 class="form-title">Sign in</h2>
+                        <h2 class="form-title">Admin Log In</h2>
                         <form action="functions/authcode.php" method="POST" role="form">                       
                            <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
@@ -46,7 +45,7 @@ session_start();
                                 <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
                             </div>
                             <div class="form-group form-button">
-                                <button type="submit" name="login_btn" id="signin" class="form-submit">Sign In</button>
+                                <button type="submit" name="adminlogin_btn" id="signin" class="form-submit">Sign In</button>
                             </div>
                         </form>
                         <!-- <div class="social-login">
