@@ -47,6 +47,7 @@ session_start();
         <ul>
           <li><a class="nav-link" href="index.php">Home</a></li>
           <li><a class="nav-link" href="about.php">About</a></li>
+          <li><a class="nav-link" href="event.php">Events</a></li>
           <li><a class="nav-link" href="#">Blog</a></li>
           <li><a class="nav-link" href="startup.php">Startups</a></li>
           <li><a class="nav-link" href="contact.php">Contact</a></li>
