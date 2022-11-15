@@ -119,16 +119,24 @@ if (isset($_POST['add_details_btn'])) {
 
     // print_r($add_details_query);die;
     $check_detailS_query = "SELECT announcementid FROM announcementdetails WHERE announcementid = '$announcementid' ";
-    $check_detailS_query = mysqli_query($conn, $check_detailS_query);
+    $check_detailS_query_run = mysqli_query($conn, $check_detailS_query);
 
-    if (mysqli_num_rows($check_detailS_query) > 0) {
+    $get_name_query = "SELECT title FROM announcement WHERE id='$announcementid' ";
+    $get_name_query_run = mysqli_query($conn, $get_name_query);
+
+    foreach($get_name_query_run as $item){
+
+    $eventname = $item['title'];
+    }
+
+    if (mysqli_num_rows($check_detailS_query_run) > 0) {
         redirect("details.php", "Details already added! Try updating details!");
         // $_SESSION['message'] = "Email already registered";
         // header("Location: ../register.php");
     } else {
         $add_details_query = "INSERT INTO announcementdetails 
-        (announcementid, organiser, eventtype, payment, category, venue, description, startdate, enddate, timingsfrom, timingsto, prerequisites, youtubelink, paymentdetails, registrationlink, contactperson1name, contactperson1number, contactperson2name, contactperson2number)
-        VALUES ('$announcementid', '$organiser', '$eventtype', '$payment', '$category', '$venue', '$description', '$startdate', '$enddate', '$timingsfrom', '$timingsto', '$prerequisites', '$youtubelink', '$paymentdetails', '$registrationlink', '$contactperson1name', '$contactperson1number', '$contactperson2name', '$contactperson2number')";
+        (announcementid, title, organiser, eventtype, payment, category, venue, description, startdate, enddate, timingsfrom, timingsto, prerequisites, youtubelink, paymentdetails, registrationlink, contactperson1name, contactperson1number, contactperson2name, contactperson2number)
+        VALUES ('$announcementid', '$eventname', '$organiser', '$eventtype', '$payment', '$category', '$venue', '$description', '$startdate', '$enddate', '$timingsfrom', '$timingsto', '$prerequisites', '$youtubelink', '$paymentdetails', '$registrationlink', '$contactperson1name', '$contactperson1number', '$contactperson2name', '$contactperson2number')";
 
         $add_details_query_run = mysqli_query($conn, $add_details_query);
 

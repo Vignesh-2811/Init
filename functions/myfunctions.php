@@ -17,6 +17,14 @@ function getAnn($table, $name)
     
 }
 
+function getDetails($table, $name)
+{
+    global $conn;
+    $query = "SELECT * FROM $table WHERE organiser = '$name'";
+    return $query_run = mysqli_query($conn, $query);
+
+}
+
 function getByID($table, $id)
 {
     global $conn;

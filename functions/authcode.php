@@ -127,6 +127,7 @@ else if(isset($_POST['adminlogin_btn']))
             'email' => $useremail,
             'role_as' => $role_as,
         ];
+        $_SESSION['role_as'] = $role_as;
         if($role_as == '1')
         {
             redirect("../admin/announcement.php","Welcome to dashboard");

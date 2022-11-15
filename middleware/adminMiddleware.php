@@ -3,6 +3,8 @@ session_start();
 error_reporting(E_ERROR | E_PARSE);
 
 include("../functions/myfunctions.php");
+// echo $_SESSION['role_as'];
+// echo 'hi';
 
 if(isset($_SESSION['auth']))
 {
